@@ -15,7 +15,54 @@
 Hecho en mermaid
 
 ```mermaid
+classDiagram
+direction TB
 
+    Restaurant "1" *-- "0..*" MenuItem
+    Order "1" o-- "0..*" MenuItem
+    MenuItem <|-- Drinks
+    MenuItem <|-- PrincipalDishes
+    MenuItem <|-- Desserts
+    MenuItem <|-- AdditionalDishes
+
+
+    class Restaurant {
+	    +name : String
+	    +size : String
+    }
+
+    class MenuItem {
+	    +name : String
+	    +price : float
+    }
+
+    class Order {
+	    +name : String
+        +item : List
+        +add_item(item : MenuItem)
+        +total_price()
+        +apply_discount()
+        +pay_product()
+    }
+
+    class Drinks {
+        +size : String
+        +type_drink : String
+    }
+
+    class PrincipalDishes {
+        +dish_type : String
+        +dish_size : String
+    }
+
+    class Desserts {
+        +dessert_type : String
+        +portion_size : String
+    }
+
+    class AdditionalDishes {
+        +portion_size : String
+    }
 ```
 Hecho en python
 
