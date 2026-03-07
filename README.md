@@ -38,7 +38,7 @@ direction TB
 
     class Order {
 	    +name : String
-        +item : List
+        +items : List
         +add_item(item : MenuItem)
         +total_price()
         +apply_discount()
