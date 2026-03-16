@@ -30,8 +30,8 @@ class Line {
     +compute_horizontal_cross()
     +compute_vertical_crooss()
 }
-
 ```
+[Solución_hecha_en_python](Line.py)
 
 # Reto 3
 
@@ -99,3 +99,5 @@ direction TB
         +portion_size : String
     }
 ```
+
+[Solución_hecha_en_python](restaurante.py)
