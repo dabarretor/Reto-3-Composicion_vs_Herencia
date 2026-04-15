@@ -35,7 +35,43 @@ class Line:
             return False
 
 class Rectangle:
-    def __init__(self, width: float, height: float, center_point: Point):
+    def __init__(self, **kwargs):
+        if 'width' in kwargs and 'height' in kwargs and 'bottom_left_corner' in kwargs:
+            self.width = kwargs['width']
+            self.height = kwargs['height']
+            bottom_left_corner = kwargs['bottom_left_corner']
+    
+            center_x = bottom_left_corner.x + (self.width/2) # The center is sought at x.
+            center_y = bottom_left_corner.y + (self.height/2) # The center is sought in y.
+
+            rectangle1 = self.width, self.height, Point(center_x, center_y)
+        
+        elif 'width' in kwargs and 'height' in kwargs and 'center_point' in kwargs:
+            self.width = kwargs['width']
+            self.height = kwargs['height']
+            center_point = kwargs['center_point']
+
+            rectangle2 = self.width, self.height, center_point
+        
+        elif 'point1' in kwargs and 'point2' in kwargs:
+            width = abs(point2.x - point1.x)
+            height = abs(point2.y - point1.y)
+            center_x = (point1.x + point2.x)/2
+            center_y = (point1.y + point2.y)/2
+            rectangle3 = width, height, Point(center_x, center_y)
+        
+        elif 'bottom_line' in kwargs and 'top_line' in kwargs and 'left_line' in kwargs and 'right_line' in kwargs:
+            self.bottom_line = kwargs['bottom_line']
+            width = self.bottom_line.compute_length()
+            height = self.left_line.compute_length()
+            
+            # We calculate the center point of the rectangle using the midpoint formula
+            center_x = (self.bottom_line.start.x + self.bottom_line.end.x) / 2
+            center_y = (self.left_line.start.y + self.left_line.end.y) / 2
+            
+            # The original __init__ is reused to create the rectangle
+            rectangle4 = width, height, Point(center_x, center_y)
+        
         self.width = width
         self.height = height
         self.center_point = center_point
@@ -54,39 +90,10 @@ class Rectangle:
         self.top_line = Line(p_top_left, p_top_right)
         self.left_line = Line(p_bottom_left, p_top_left)
         self.right_line = Line(p_bottom_right, p_top_right)
-        
+            
         self.lines = [self.bottom_line, self.top_line, self.left_line, self.right_line]
 
 
-    @classmethod
-    def method_1(cls, width: float, height: float, bottom_left_corner: Point):
-        center_x = bottom_left_corner.x + (width/2) # The center is sought at x.
-        center_y = bottom_left_corner.y + (height/2) # The center is sought in y.
-        return cls(width, height, Point(center_x, center_y))
-    
-    @classmethod
-    def method_2(cls, width: float, height: float, center_point: Point):
-        return cls(width, height, center_point)
-    
-    @classmethod
-    def method_3(cls, point1: Point, point2: Point):
-        width = abs(point2.x - point1.x)
-        height = abs(point2.y - point1.y)
-        center_x = (point1.x + point2.x)/2
-        center_y = (point1.y + point2.y)/2
-        return cls(width, height, Point(center_x, center_y))
-
-    @classmethod
-    def method_4(cls, bottom_line: Line, top_line: Line, left_line: Line, right_line: Line):
-        width = bottom_line.compute_length()
-        height = left_line.compute_length()
-            
-            # Calculamos el centro promediando los puntos de las líneas
-        center_x = (bottom_line.start.x + bottom_line.end.x) / 2
-        center_y = (left_line.start.y + left_line.end.y) / 2
-            
-            # Reutilizamos el __init__ original
-        return cls(width, height, Point(center_x, center_y))
     def compute_area(self):
         return self.width * self.height
 
@@ -135,7 +142,7 @@ if __name__  == "__main__":
     point2 = Point(4.5, 0.46)
     # of the line 138 to 132 is of the class Rectangle, 
     # using two points as opposite corners (method_3).
-    rectangle = Rectangle.method_3(point1, point2)
+    rectangle = Rectangle.rectangle3(point1, point2)
     area = rectangle.compute_area()
     perimeter = rectangle.compute_perimeter()
     interference = rectangle.compute_interference_point(Point(2, -1))
@@ -163,7 +170,7 @@ if __name__  == "__main__":
     line_right = Line(p2, p4)
 
     # A new rectangle is created using 4 lines
-    rect_from_lines = Rectangle.method_4(line_bottom, line_top, line_left, line_right)
+    rect_from_lines = Rectangle.rectangle4(line_bottom, line_top, line_left, line_right)
     print(f"Area: {rect_from_lines.compute_area()}") # Output: Area: 12.0
     print(f"Perimeter: {rect_from_lines.compute_perimeter()}") # Output: Perimeter: 14.0
     print(f"\n{'-'*30}")
