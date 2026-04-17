@@ -94,10 +94,10 @@ class Rectangle:
             self.height = height
             self.center_point = Point(center_x, center_y)
         # Allows the rectangle to be created from its four boundary lines
-        min_x = self.center_point.x - (self.width / 2) #
-        max_x = self.center_point.x + (self.width / 2) #
-        min_y = self.center_point.y - (self.height / 2) #
-        max_y = self.center_point.y + (self.height / 2) #
+        min_x = self.center_point.x - (self.width / 2) # Represents the entire left edge.
+        max_x = self.center_point.x + (self.width / 2) # Represents the entire right edge.
+        min_y = self.center_point.y - (self.height / 2) # Represents the entire bottom edge.
+        max_y = self.center_point.y + (self.height / 2) # Represents the entire top edge.
 
         p_bottom_left = Point(min_x, min_y)
         p_bottom_right = Point(max_x, min_y)
