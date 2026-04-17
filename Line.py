@@ -162,7 +162,7 @@ class Rectangle:
 if __name__ == "__main__":
     # of the line 138 to 132 is of the class Rectangle,
     # using two points as opposite corners (method_3).
-    rectangle = Rectangle(point1=Point(0.5, -3.54), point2=Point(4.5, 0.46))
+    rectangle = Rectangle(point1 = Point(0.5, -3.54), point2 = Point(4.5, 0.46))
     area = rectangle.compute_area()
     perimeter = rectangle.compute_perimeter()
     interference = rectangle.compute_interference_point(Point(2, -1))
@@ -192,10 +192,10 @@ if __name__ == "__main__":
 
     # A new rectangle is created using 4 lines
     rect_from_lines = Rectangle(
-        bottom_line=Line(p1, p2),
-        top_line=Line(p3, p4),
-        left_line=Line(p1, p3),
-        right_line=Line(p2, p4),
+        bottom_line = Line(p1, p2),
+        top_line = Line(p3, p4),
+        left_line = Line(p1, p3),
+        right_line = Line(p2, p4),
     )
     print(f"Area: {rect_from_lines.compute_area()}")  # Output: Area: 12.0
     print(
