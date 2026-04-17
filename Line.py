@@ -39,6 +39,8 @@ class Line:
 
 class Rectangle:
     def __init__(self, **kwargs):
+        # The rectangle can be created using different combinations of parameters using the **kwargs syntax.
+        # In case 1, the rectangle is created using the width, height, and bottom left corner.
         if "width" in kwargs and "height" in kwargs and "bottom_left_corner" in kwargs:
             self.width = kwargs["width"]
             self.height = kwargs["height"]
@@ -53,11 +55,13 @@ class Rectangle:
 
             self.center_point = Point(center_x, center_y)
 
+        # In case 2, the rectangle is created using the width, height, and center point.
         elif "width" in kwargs and "height" in kwargs and "center_point" in kwargs:
             self.width = kwargs["width"]
             self.height = kwargs["height"]
             self.center_point = kwargs["center_point"]
 
+        # In case 3, the rectangle is created using two opposite corners.
         elif "point1" in kwargs and "point2" in kwargs:
             self.point1 = kwargs["point1"]
             self.point2 = kwargs["point2"]
@@ -69,7 +73,7 @@ class Rectangle:
             self.width = width
             self.height = height
             self.center_point = Point(center_x, center_y)
-
+        # In case 4, the rectangle is created using the four lines that form it.
         elif (
             "bottom_line" in kwargs
             and "top_line" in kwargs
@@ -89,11 +93,11 @@ class Rectangle:
             self.width = width
             self.height = height
             self.center_point = Point(center_x, center_y)
-
-        min_x = self.center_point.x - (self.width / 2)
-        max_x = self.center_point.x + (self.width / 2)
-        min_y = self.center_point.y - (self.height / 2)
-        max_y = self.center_point.y + (self.height / 2)
+        # Allows the rectangle to be created from its four boundary lines
+        min_x = self.center_point.x - (self.width / 2) #
+        max_x = self.center_point.x + (self.width / 2) #
+        min_y = self.center_point.y - (self.height / 2) #
+        max_y = self.center_point.y + (self.height / 2) #
 
         p_bottom_left = Point(min_x, min_y)
         p_bottom_right = Point(max_x, min_y)
@@ -104,7 +108,7 @@ class Rectangle:
         self.top_line = Line(p_top_left, p_top_right)
         self.left_line = Line(p_bottom_left, p_top_left)
         self.right_line = Line(p_bottom_right, p_top_right)
-
+        # The lines that form the rectangle are stored in a list for easy access and manipulation.
         self.lines = [self.bottom_line, self.top_line, self.left_line, self.right_line]
 
     def compute_area(self):
