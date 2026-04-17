@@ -44,24 +44,28 @@ class Rectangle:
             center_x = bottom_left_corner.x + (self.width/2) # The center is sought at x.
             center_y = bottom_left_corner.y + (self.height/2) # The center is sought in y.
 
-            rectangle1 = self.width, self.height, Point(center_x, center_y)
+            self.center_point = Point(center_x, center_y)
         
         elif 'width' in kwargs and 'height' in kwargs and 'center_point' in kwargs:
             self.width = kwargs['width']
             self.height = kwargs['height']
-            center_point = kwargs['center_point']
-
-            rectangle2 = self.width, self.height, center_point
+            self.center_point = kwargs['center_point']
         
         elif 'point1' in kwargs and 'point2' in kwargs:
-            width = abs(point2.x - point1.x)
-            height = abs(point2.y - point1.y)
-            center_x = (point1.x + point2.x)/2
-            center_y = (point1.y + point2.y)/2
-            rectangle3 = width, height, Point(center_x, center_y)
+            self.point1 = kwargs['point1']
+            self.point2 = kwargs['point2']
+            width = abs(self.point2.x - self.point1.x)
+            height = abs(self.point2.y - self.point1.y)
+            center_x = (self.point1.x + self.point2.x)/2
+            center_y = (self.point1.y + self.point2.y)/2
+
+            self.width = width
+            self.height = height
+            self.center_point = Point(center_x, center_y)
         
         elif 'bottom_line' in kwargs and 'top_line' in kwargs and 'left_line' in kwargs and 'right_line' in kwargs:
             self.bottom_line = kwargs['bottom_line']
+            self.left_line = kwargs['left_line']
             width = self.bottom_line.compute_length()
             height = self.left_line.compute_length()
             
@@ -70,12 +74,10 @@ class Rectangle:
             center_y = (self.left_line.start.y + self.left_line.end.y) / 2
             
             # The original __init__ is reused to create the rectangle
-            rectangle4 = width, height, Point(center_x, center_y)
+            self.width = width
+            self.height = height
+            self.center_point = Point(center_x, center_y)
         
-        self.width = width
-        self.height = height
-        self.center_point = center_point
-
         min_x = self.center_point.x - (self.width / 2)
         max_x = self.center_point.x + (self.width / 2)
         min_y = self.center_point.y - (self.height / 2)
@@ -138,11 +140,9 @@ class Rectangle:
 
 if __name__  == "__main__":
 
-    point1 = Point(0.5, -3.54)
-    point2 = Point(4.5, 0.46)
     # of the line 138 to 132 is of the class Rectangle, 
     # using two points as opposite corners (method_3).
-    rectangle = Rectangle.rectangle3(point1, point2)
+    rectangle = Rectangle(point1 = Point(0.5, -3.54), point2 = Point(4.5, 0.46))
     area = rectangle.compute_area()
     perimeter = rectangle.compute_perimeter()
     interference = rectangle.compute_interference_point(Point(2, -1))
@@ -164,13 +164,8 @@ if __name__  == "__main__":
     p3 = Point(0, 3)
     p4 = Point(4, 3)
 
-    line_bottom = Line(p1, p2)
-    line_top = Line(p3, p4)
-    line_left = Line(p1, p3)
-    line_right = Line(p2, p4)
-
     # A new rectangle is created using 4 lines
-    rect_from_lines = Rectangle.rectangle4(line_bottom, line_top, line_left, line_right)
+    rect_from_lines = Rectangle(bottom_line = Line(p1, p2), top_line = Line(p3, p4), left_line = Line(p1, p3), right_line = Line(p2, p4))
     print(f"Area: {rect_from_lines.compute_area()}") # Output: Area: 12.0
     print(f"Perimeter: {rect_from_lines.compute_perimeter()}") # Output: Perimeter: 14.0
     print(f"\n{'-'*30}")
@@ -189,8 +184,3 @@ if __name__  == "__main__":
     print(f"horizontal cross: {line.compute_horizontal_cross()}")
     # Output: vertical cross: False 
     print(f"vertical cross: {line.compute_vertical_cross()}") 
-    
-
-    
-
-
