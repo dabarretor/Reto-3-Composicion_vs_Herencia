@@ -122,16 +122,16 @@ class Rectangle:
         For this, the maximum and minimum values of x and y
         that a point can have to be inside the rectangle are calculated.
         """
-        Min_x = self.center_point.x - (
+        min_x = self.center_point.x - (
             self.width / 2
         )  # Represents the entire left edge.
-        Max_x = self.center_point.x + (
+        max_x = self.center_point.x + (
             self.width / 2
         )  # Represents the entire right edge.
-        Min_y = self.center_point.y - (
+        min_y = self.center_point.y - (
             self.height / 2
         )  # Represents the entire bottom edge.
-        Max_y = self.center_point.y + (
+        max_y = self.center_point.y + (
             self.height / 2
         )  # Represents the entire top edge.
 
@@ -141,7 +141,7 @@ class Rectangle:
         Otherwise, it returns False.
         """
 
-        if Max_x >= point.x >= Min_x and Max_y >= point.y >= Min_y:
+        if max_x >= point.x >= min_x and max_y >= point.y >= min_y:
             return True
         else:
             return False
@@ -172,12 +172,10 @@ if __name__ == "__main__":
 
     print("RECTANGLE DATA:")
     print(
-        f"Width: {rectangle.width} and Height: \
-          {rectangle.height}"
+        f"Width: {rectangle.width} and Height: {rectangle.height}"
     )  # Output: Width: 4.0 and Height: 4.0
     print(
-        f"Center Point: ({rectangle.center_point.x},\
-          {rectangle.center_point.y})"
+        f"Center Point: ({rectangle.center_point.x}, {rectangle.center_point.y})"
     )  # Output: Center Point: (2.5, -1.54)
     print(f"Area: {area}")  # Output: Area: 16.0
     print(f"Perimeter: {perimeter}")  # Output: Perimeter: 16.0

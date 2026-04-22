@@ -39,6 +39,9 @@ class MenuItem:
 
     def __str__(self) -> str:
         return f"{self.name} (${self.price:.2f})"
+    
+    def calculate_total_price(self) -> float:
+        return self.price
 
 class Order:
     def __init__(self, name: str):
@@ -56,7 +59,7 @@ class Order:
     def total_price(self):
         total = 0.0
         for item in self.items:
-            total += item.price
+            total += item.calculate_total_price()
         return total
 
     """ 
