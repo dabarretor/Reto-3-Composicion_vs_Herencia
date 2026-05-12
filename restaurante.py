@@ -4,6 +4,7 @@ We take customer orders and apply discounts depending on the combo they order.
 The program demonstrates the use of classes, composition, and inheritance in Python.
 """
 
+
 class Restaurant:
     def __init__(self, name: str, size: str):
         self.name = name
@@ -32,6 +33,7 @@ class Restaurant:
         self.menu.append(AdditionalDishes("for share", "French fries", 3.50))
         self.menu.append(AdditionalDishes("Personal", "salad", 2.25))
 
+
 class MenuItem:
     def __init__(self, name: str, price: float):
         self.name = name
@@ -39,9 +41,10 @@ class MenuItem:
 
     def __str__(self) -> str:
         return f"{self.name} (${self.price:.2f})"
-    
+
     def calculate_total_price(self) -> float:
         return self.price
+
 
 class Order:
     def __init__(self, name: str):
@@ -107,11 +110,13 @@ class Order:
         else:
             return round(total_price, 2)
 
+
 class Drinks(MenuItem):
     def __init__(self, type_drink: str, size: str, name: str, price: float):
         super().__init__(name, price)
         self.type = type_drink
         self.size = size
+
 
 class PrincipalDishes(MenuItem):
     def __init__(self, dish_type: str, dish_size: str, name: str, price: float):
@@ -119,16 +124,19 @@ class PrincipalDishes(MenuItem):
         self.dish_type = dish_type
         self.dish_size = dish_size
 
+
 class Desserts(MenuItem):
     def __init__(self, dessert_type: str, portion_size: str, name: str, price: float):
         super().__init__(name, price)
         self.dessert_type = dessert_type
         self.portion_size = portion_size
 
+
 class AdditionalDishes(MenuItem):
     def __init__(self, portion_size: str, name: str, price: float):
         super().__init__(name, price)
         self.portion_size = portion_size
+
 
 # test of program functionality
 if __name__ == "__main__":

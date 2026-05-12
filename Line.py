@@ -1,9 +1,11 @@
 import math
 
+
 class Point:
     def __init__(self, x: float, y: float):
         self.x = x
         self.y = y
+
 
 class Line:
     def __init__(self, start: Point, end: Point):
@@ -36,6 +38,7 @@ class Line:
             return True
         else:
             return False
+
 
 class Rectangle:
     def __init__(self, **kwargs):
@@ -94,10 +97,18 @@ class Rectangle:
             self.height = height
             self.center_point = Point(center_x, center_y)
         # Allows the rectangle to be created from its four boundary lines
-        min_x = self.center_point.x - (self.width / 2) # Represents the entire left edge.
-        max_x = self.center_point.x + (self.width / 2) # Represents the entire right edge.
-        min_y = self.center_point.y - (self.height / 2) # Represents the entire bottom edge.
-        max_y = self.center_point.y + (self.height / 2) # Represents the entire top edge.
+        min_x = self.center_point.x - (
+            self.width / 2
+        )  # Represents the entire left edge.
+        max_x = self.center_point.x + (
+            self.width / 2
+        )  # Represents the entire right edge.
+        min_y = self.center_point.y - (
+            self.height / 2
+        )  # Represents the entire bottom edge.
+        max_y = self.center_point.y + (
+            self.height / 2
+        )  # Represents the entire top edge.
 
         p_bottom_left = Point(min_x, min_y)
         p_bottom_right = Point(max_x, min_y)
@@ -159,10 +170,10 @@ class Rectangle:
         else:
             return False
 
+
 if __name__ == "__main__":
-    # of the line 138 to 132 is of the class Rectangle,
-    # using two points as opposite corners (method_3).
-    rectangle = Rectangle(point1 = Point(0.5, -3.54), point2 = Point(4.5, 0.46))
+    # Using two points as opposite corners (method_3).
+    rectangle = Rectangle(point1=Point(0.5, -3.54), point2=Point(4.5, 0.46))
     area = rectangle.compute_area()
     perimeter = rectangle.compute_perimeter()
     interference = rectangle.compute_interference_point(Point(2, -1))
@@ -190,10 +201,10 @@ if __name__ == "__main__":
 
     # A new rectangle is created using 4 lines
     rect_from_lines = Rectangle(
-        bottom_line = Line(p1, p2),
-        top_line = Line(p3, p4),
-        left_line = Line(p1, p3),
-        right_line = Line(p2, p4),
+        bottom_line=Line(p1, p2),
+        top_line=Line(p3, p4),
+        left_line=Line(p1, p3),
+        right_line=Line(p2, p4),
     )
     print(f"Area: {rect_from_lines.compute_area()}")  # Output: Area: 12.0
     print(
@@ -201,7 +212,6 @@ if __name__ == "__main__":
     )  # Output: Perimeter: 14.0
     print(f"\n{'-' * 30}")
 
-    # of the line 134 to 143 is of the class Line
     line = Line(Point(1, 2), Point(4, 6))
     length = line.compute_length()
     slope = line.compute_slope()
